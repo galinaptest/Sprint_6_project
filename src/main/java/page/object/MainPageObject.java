@@ -1,4 +1,4 @@
-package PageObject;
+package page.object;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,7 +9,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainPageObjects {
+public class MainPageObject {
     private WebDriver driver;
 
     private By orderButtonTop = By.xpath("//div[@class='Header_Nav__AGCXC']/button[text()='Заказать']"); // Кнопка «Заказать» верх страницы
@@ -19,27 +19,26 @@ public class MainPageObjects {
     private By faqAnswersList = By.className("accordion__panel");//Вопросы о важном список ответов
     private By cookieButton = By.className("App_CookieButton__3cvqF");//
 
-    public MainPageObjects(WebDriver driver){
+    public MainPageObject(WebDriver driver){
         this.driver = driver;
     }
     public void closeCookie(){
         driver.findElement(cookieButton).click();
     };
 
-    public List<String> clickFaqQuestion() {
+    public String clickFaqQuestion(int listNumber) {
         WebElement element = driver.findElement(faqListName);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         List<WebElement> questionButtons = driver.findElements(faqQuestionsList);
         List<WebElement> answerButtons = driver.findElements(faqAnswersList);
-        List<String> textAnswer = new ArrayList<>();
-        for (int i = 0; i < questionButtons.size(); i++) {
-            WebElement questionButton = questionButtons.get(i);
+       String textAnswer;
+
+            WebElement questionButton = questionButtons.get(listNumber);
             questionButton.click();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-            WebElement answerButton = answerButtons.get(i);
-            textAnswer.add(answerButton.getAttribute("innerText"));
-        }
-        System.out.println(textAnswer);
+            WebElement answerButton = answerButtons.get(listNumber);
+            textAnswer=answerButton.getAttribute("innerText");
+
         return textAnswer;
     }
 
