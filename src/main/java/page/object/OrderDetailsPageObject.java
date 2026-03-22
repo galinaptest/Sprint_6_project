@@ -1,4 +1,4 @@
-package PageObject;
+package page.object;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,13 +17,13 @@ public class OrderDetailsPageObject {
     public OrderDetailsPageObject(WebDriver driver){
         this.driver = driver;
     }
-    public void orderDetailsFilling(){
+    public void orderDetailsFilling(String comment){
         driver.findElement(dateField).click();
         driver.findElement(datepicker).click();
         driver.findElement(durationField).click();
         driver.findElement(durationList).click();
         driver.findElement(colorCheckbox).click();
-        driver.findElement(commentField).sendKeys("Лучший самокат");
+        driver.findElement(commentField).sendKeys(comment);
         driver.findElement(orderButton).click();
     }
 }

@@ -1,11 +1,11 @@
-package PageObject;
+package page.object;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 
-public class OrderFormPageObjects {
+public class OrderFormPageObject {
     private WebDriver driver;
 
     private By nameField = By.cssSelector("input[placeholder='* Имя']");//имя
@@ -16,7 +16,7 @@ public class OrderFormPageObjects {
     private By phoneField = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");//телефон
     private By nextButton = By.xpath("//div[@class='Order_NextButton__1_rCA']/button"); //кнопка Далее
 
-    public OrderFormPageObjects(WebDriver driver){
+    public OrderFormPageObject(WebDriver driver){
         this.driver = driver;
     }
     public void formFilling(String name, String surname, String address, String phone){
